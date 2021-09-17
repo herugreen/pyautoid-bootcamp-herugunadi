@@ -1,44 +1,21 @@
 from selenium import webdriver
-import time
 
-driver =  webdriver.Chrome(executable_path='C:\chromedriver_win32\chromedriver.exe') 
-driver.get('https://demoqa.com/webtables')
-
+driver =  webdriver.Chrome()
 driver.maximize_window()
 
-driver.find_element_by_id("addNewRecordButton").click()
+driver.get('https://demoqa.com/webtables')
 
-#data1
-driver.find_element_by_id("firstName").send_keys("Heru")
-driver.find_element_by_id("lastName").send_keys("Gunadi")
-driver.find_element_by_id("userEmail").send_keys("crayonshinchan@yahoo.com")
-driver.find_element_by_id("age").send_keys("17")
-driver.find_element_by_id("salary").send_keys("10000000")
-driver.find_element_by_id("department").send_keys("IT")
-driver.find_element_by_id("submit").click()
+users = [
+        {'firstName':'Heru', 'lastName':'Gunadi', 'userEmail':'crayonshinchan@yahoo.com', 'age':'17', 'salary':'10000000', 'department':'IT'},
+        {'firstName':'Dian', 'lastName':'Sastro', 'userEmail':'diansatrouhuy@gmail.com', 'age':'28', 'salary':'15000000', 'department':'IT'},
+        {'firstName':'Den Bagus', 'lastName':'Tjokroaminoto', 'userEmail':'denbagus@gmail.com', 'age':'25', 'salary':'12000000', 'department':'IT'}
+        ]
 
-time.sleep(2)
+for user in users:
 
-driver.find_element_by_id("addNewRecordButton").click()
+    driver.find_element_by_id('addNewRecordButton').click()
 
-#data2
-driver.find_element_by_id("firstName").send_keys("Dian")
-driver.find_element_by_id("lastName").send_keys("Sastro")
-driver.find_element_by_id("userEmail").send_keys("diansatrouhuy@gmail.com")
-driver.find_element_by_id("age").send_keys("28")
-driver.find_element_by_id("salary").send_keys("15000000")
-driver.find_element_by_id("department").send_keys("Marketing")
-driver.find_element_by_id("submit").click()
+    for key in user:
+        driver.find_element_by_id(key).send_keys(user[key])
 
-time.sleep(2)
-
-driver.find_element_by_id("addNewRecordButton").click()
-
-#data3
-driver.find_element_by_id("firstName").send_keys("Den Bagus")
-driver.find_element_by_id("lastName").send_keys("Tjokroaminoto")
-driver.find_element_by_id("userEmail").send_keys("denbagus@gmail.com")
-driver.find_element_by_id("age").send_keys("25")
-driver.find_element_by_id("salary").send_keys("12000000")
-driver.find_element_by_id("department").send_keys("Produksi")
-driver.find_element_by_id("submit").click()
+    driver.find_element_by_id('submit').click()
